@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dice Roll</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      color: rgb(92, 0, 0);
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding-top: 80px;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    img {
+      width: 150px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(20deg); }
+      50% { transform: rotate(-20deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 1.2em;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎲 Roll the Dice</h1>
+  <img id="dice" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg" alt="Dice">
+  <div>
+    <button onclick="rollDice()">Roll Dice</button>
+  </div>
+
+  <script>
+    function rollDice() {
+      const dice = document.getElementById('dice');
+      dice.classList.add('shake');
+
+      setTimeout(() => {
+        dice.classList.remove('shake');
+        const roll = Math.floor(Math.random() * 6) + 1;
+        dice.src = `https://upload.wikimedia.org/wikipedia/commons/${getImageCode(roll)}`;
+      }, 500);
+    }
+
+    function getImageCode(number) {
+      // Match number to SVG URL ending
+      const codes = {
+        1: "1/1b/Dice-1-b.svg",
+        2: "5/5f/Dice-2-b.svg",
+        3: "b/b1/Dice-3-b.svg",
+        4: "f/fd/Dice-4-b.svg",
+        5: "0/08/Dice-5-b.svg",
+        6: "2/26/Dice-6-b.svg"
+      };
+      return codes[number];
+    }
+  </script>
+
+</body>
+</html>
